@@ -2,7 +2,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  name: Default
 
 variables:
   buildConfiguration: 'Release'
@@ -11,7 +11,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '6.0.x'
+    version: '8.0.x'
     includePreviewVersions: true
 
 - task: DotNetCoreCLI@2
@@ -45,6 +45,8 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: '<service connection name>'
-    appName: '<app service name>'
+    azureSubscription: 'Free Trial(5cfceeae-0d0a-44e7-9536-53ce2c82ffc3)'
+    appType: 'webApp'
+    appName: 'Pipelinewebapp5'
     package: '$(System.ArtifactsDirectory)/package/**/*.zip'
+    deploymentMethod: 'auto'
